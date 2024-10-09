@@ -1,6 +1,6 @@
 def create_schedule():
     empty_schedule = {"parent name": [], "phone": [], "date": [], "day": [], "hour": [], "city": [],
-                      "comments": [], "volunteer": []}
+                      "comments": [], "volunteers": []}
     return empty_schedule
 
 def add_request_line(schedule, request):
@@ -11,4 +11,4 @@ def add_request_line(schedule, request):
     schedule["hour"].append(request[4])
     schedule["city"].append(request[5])
     schedule["comments"].append(request[6])
-
+    schedule["volunteers"].append("wanted")
