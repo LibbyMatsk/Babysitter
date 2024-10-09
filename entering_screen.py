@@ -45,6 +45,7 @@ def create_volunteer_button():
 
 
 def draw_welcome_screen():
+    screen.fill(Consts.BACKGROUND_COLOR)
     parent_button = create_parent_button()
     volunteer_button = create_volunteer_button()
 
@@ -58,10 +59,9 @@ def draw_welcome_screen():
     screen.blit(Consts.PARENT_IMAGE, (210, 315))
     screen.blit(Consts.LOGO_IMAGE, (340, 60))
 
-
-
     draw_hello_text()
     draw_question_text()
+    pygame.display.update()
 
 
 
