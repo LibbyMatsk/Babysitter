@@ -27,8 +27,16 @@ def table_headers_and_rows(schedule):
 screen = pygame.display.set_mode((Consts.WINDOW_WIDTH, Consts.WINDOW_HEIGHT))
 pygame.display.set_caption("Babysitter Requests")
 
-# Data for babysitter requests
 
+def draw_message(message, font_size, color, location):
+    font = pygame.font.SysFont(Consts.FONT_NAME, font_size)
+    text_img = font.render(message, True, color)
+    screen.blit(text_img, location)
+
+def draw_title():
+    message = "Babysitting Schedule".upper()
+    draw_message(message, 50, Consts.HELLO_COLOR,
+                 (300, 50))
 
 # Font
 font = pygame.font.SysFont(Consts.FONT_NAME, 20)
@@ -57,6 +65,7 @@ def show_table_screen(schedule):
     screen.fill(Consts.WHITE)
     rows_headers = table_headers_and_rows(schedule)
     draw_table(rows_headers[0], rows_headers[1])
+    draw_title()
     pygame.display.update()
 
 def update_schedule(schedule, newRequest):
