@@ -3,6 +3,8 @@ import sys
 import Schedule
 import Consts
 
+
+pygame.init()
 def table_headers_and_rows(schedule):
     '''
 
@@ -29,7 +31,7 @@ pygame.display.set_caption("Babysitter Requests")
 
 
 # Font
-font = pygame.font.SysFont('Arial', 20)
+font = pygame.font.SysFont(Consts.FONT_NAME, 20)
 
 def draw_cell(text, x, y, width, height, color=Consts.WHITE, border_color=Consts.BLACK):
     pygame.draw.rect(screen, color, (x, y, width, height))  # Fill color

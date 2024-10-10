@@ -61,6 +61,10 @@ def create_input_rect():
 
 
 
+def create_input_rect():
+    return pygame.Rect(200, 200, 140, 32)
+
+
 
 def draw_welcome_screen():
     screen.fill(Consts.BACKGROUND_COLOR)
