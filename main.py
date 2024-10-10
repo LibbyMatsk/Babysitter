@@ -4,6 +4,7 @@ import entering_screen
 import show_schedule
 import Schedule
 import Screen
+import request1
 
 
 
@@ -40,6 +41,14 @@ def main():
                         current_user = "Volunteer"
                         show_schedule.show_table_for_volunteer(schedule)
                         is_display_entering_screen = False
+
+                    elif  show_schedule.create_request_button().collidepoint(event.pos):
+                        print("request selected")
+                        request1.get_request()
+                        show_schedule.show_table_screen_for_parent(schedule)
+                        is_display_entering_screen = False
+                        # current_user = "Parent"
+
 
                     pygame.display.update()
 

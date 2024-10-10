@@ -92,11 +92,14 @@ def draw_message(message, font_size, color, location):
     screen.blit(text_img, location)
 
 def draw_request_button_text(x, y):
-    message = "Add Request"
+    message = "+Add Request".upper()
     draw_message(message, 30, Consts.HELLO_COLOR,
                  (x,y))
+
 def create_request_button():
-    return pygame.Rect(210, 300, 370, 80)
+    return pygame.Rect(30, 10, 260, 50)
+
+
 
 def show_table_for_volunteer(schedule):
     screen.fill(Consts.WHITE)
@@ -110,9 +113,10 @@ def show_table_screen_for_parent(schedule):
     rows_headers = table_headers_and_rows(schedule)
     draw_table(rows_headers[0], rows_headers[1])
     request_button = create_request_button()
-    pygame.draw.rect(screen, (255, 255, 255), request_button)
+    pygame.draw.rect(screen, Consts.BACKGROUND_COLOR, request_button)
     draw_request_button_text(30, 22)
     draw_title()
+
     pygame.display.update()
 
 def update_schedule(schedule, newRequest):
