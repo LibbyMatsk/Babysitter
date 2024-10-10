@@ -111,7 +111,7 @@ def show_table_screen_for_parent(schedule):
     draw_table(rows_headers[0], rows_headers[1])
     request_button = create_request_button()
     pygame.draw.rect(screen, (255, 255, 255), request_button)
-    draw_request_button_text(300, 22)
+    draw_request_button_text(30, 22)
     draw_title()
     pygame.display.update()
 
