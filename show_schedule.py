@@ -57,24 +57,6 @@ def show_table_screen(schedule):
     draw_table(rows_headers[0], rows_headers[1])
     pygame.display.update()
 
-
-
-# def main():
-#     running = True
-#     while running:
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 running = False
-#                 pygame.quit()
-#                 sys.exit()
-#
-#         # Fill screen with white background
-#         screen.fill(WHITE)
-#
-#         # Draw the table
-#         draw_table()
-#
-#         pygame.display.update()
-#
-# if __name__ == "__main__":
-#     main()
+def update_schedule(schedule, newRequest):
+    Schedule.add_request_line(schedule, newRequest)
+    show_table_screen(schedule)
