@@ -2,9 +2,11 @@ import pygame
 import sys
 import Consts
 import Button
+import Screen
 
 
 pygame.init()
+
 
 screen = pygame.display.set_mode((Consts.WINDOW_WIDTH, Consts.WINDOW_HEIGHT))
 pygame.display.set_caption("Babysitter Matching Platform")
@@ -61,6 +63,8 @@ def draw_welcome_screen():
 
     draw_hello_text()
     draw_question_text()
+
+
     pygame.display.update()
 
 

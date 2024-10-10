@@ -1,31 +1,67 @@
-# button.py
-import pygame
-import Consts
-class Button:
-    def __init__(self, text, font_size, color, hover_color, position, size):
-        self.text = text
-        self.font_size = font_size
-        self.color = color
-        self.hover_color = hover_color
-        self.position = position
-        self.size = size
-        self.font = pygame.font.SysFont(Consts.FONT_NAME, font_size)
-        self.rect = pygame.Rect(position[0], position[1], size[0], size[1])
+# NAVIGATION BUTTON CLASS
+class Button():
 
-    def draw(self, surface):
-        # Check if the mouse is over the button
-        mouse_pos = pygame.mouse.get_pos()
-        if self.rect.collidepoint(mouse_pos):
-            pygame.draw.rect(surface, self.hover_color, self.rect)
-        else:
-            pygame.draw.rect(surface, self.color, self.rect)
+	# INITIALIZATION OF BUTTON COMPONENTS LIKE
+	# POSITION OF BUTTON, COLOR OF BUTTON,
+	# FONT COLOR OF BUTTON,
+	# FONT SIZE, TEXT INSIDE THE BUTTON
+	def __init__(self, x, y, sx, sy, bcolour, fbcolour,
+				font, fcolour, text):
+		# ORIGIN_X COORDINATE OF BUTTON
+		self.x = x
+		# ORIGIN_Y COORDINATE OF BUTTON
+		self.y = y
+		# LAST_X COORDINATE OF BUTTON
+		self.sx = sx
+		# LAST_Y COORDINATE OF BUTTON
+		self.sy = sy
+		# FONT SIZE FOR THE TEXT IN A BUTTON
+		self.fontsize = 25
+		# BUTTON COLOUR
+		self.bcolour = bcolour
+		# RECTANGLE COLOR USED TO DRAW THE BUTTON
+		self.fbcolour = fbcolour
+		# BUTTON FONT COLOR
+		self.fcolour = fcolour
+		# TEXT IN A BUTTON
+		self.text = text
+		# CURRENT IS OFF
+		self.CurrentState = False
+		# FONT OBJECT FROM THE SYSTEM FONTS
+		self.buttonf = py.font.SysFont(font,
+									self.fontsize)
 
-        # Render the text and place it in the center of the button
-        text_surface = self.font.render(self.text, True, (255, 255, 255))  # White text
-        text_rect = text_surface.get_rect(center=self.rect.center)
-        surface.blit(text_surface, text_rect)
+	# DRAW THE BUTTON FOR THE TWO TABS
+	# MENU_SCREEN AND CONTROL TABS MENU
+	def showButton(self, display):
+		if(self.CurrentState):
+			py.draw.rect(display, self.fbcolour,
+						(self.x, self.y, self.sx, self.sy))
+		else:
+			py.draw.rect(display, self.fbcolour,
+						(self.x, self.y, self.sx, self.sy))
+			# RENDER THE FONT OBJECT FROM THE SYSTEM FONTS
+		textsurface = self.buttonf.render(self.text,
+										False,
+										self.fcolour)
+		# THIS LINE WILL DRAW THE SURF ONTO THE SCREEN
+		display.blit(textsurface, ((self.x + (self.sx/2) -
+									(self.fontsize/2)*(len(self.text)/2)
+									- 5, (self.y + (self.sy/2)
+										- (self.fontsize/2)-4))))
 
-    def is_clicked(self):
-        mouse_pos = pygame.mouse.get_pos()
-        mouse_click = pygame.mouse.get_pressed()
-        return self.rect.collidepoint(mouse_pos) and mouse_click[0]  # Left mouse button
+	# THIS FUNCTION CAPTURE WHETHER ANY
+	# MOUSE EVENT OCCUR ON THE BUTTON
+	def focusCheck(self, mousepos, mouseclick):
+		if(mousepos[0] >= self.x and mousepos[0]
+			<= self.x + self.sx and mousepos[1] >= self.y
+				and mousepos[1] <= self.y + self.sy):
+			self.CurrentState = True
+			# IF MOUSE BUTTON CLICK THEN
+			# NAVIGATE TO THE NEXT OR PREVIOUS TABS
+			return mouseclick[0]
+
+		else:
+			# ELSE LET THE CURRENT STATE TO BE OFF
+			self.CurrentState = False
+			return False
