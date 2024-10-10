@@ -1,6 +1,6 @@
 import datetime
 
-
+schedule = None
 def create_schedule():
     new_schedule = {"parent name": ["Alma", "Ana", "Avi"],
                     "phone": [5014452973, 5012345443, 5312938883],
