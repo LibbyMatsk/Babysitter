@@ -1,67 +1,79 @@
-# NAVIGATION BUTTON CLASS
-class Button():
+import pygame
+import sys
+import entering_screen
+import show_schedule
+import Schedule
+import Screen
 
-	# INITIALIZATION OF BUTTON COMPONENTS LIKE
-	# POSITION OF BUTTON, COLOR OF BUTTON,
-	# FONT COLOR OF BUTTON,
-	# FONT SIZE, TEXT INSIDE THE BUTTON
-	def __init__(self, x, y, sx, sy, bcolour, fbcolour,
-				font, fcolour, text):
-		# ORIGIN_X COORDINATE OF BUTTON
-		self.x = x
-		# ORIGIN_Y COORDINATE OF BUTTON
-		self.y = y
-		# LAST_X COORDINATE OF BUTTON
-		self.sx = sx
-		# LAST_Y COORDINATE OF BUTTON
-		self.sy = sy
-		# FONT SIZE FOR THE TEXT IN A BUTTON
-		self.fontsize = 25
-		# BUTTON COLOUR
-		self.bcolour = bcolour
-		# RECTANGLE COLOR USED TO DRAW THE BUTTON
-		self.fbcolour = fbcolour
-		# BUTTON FONT COLOR
-		self.fcolour = fcolour
-		# TEXT IN A BUTTON
-		self.text = text
-		# CURRENT IS OFF
-		self.CurrentState = False
-		# FONT OBJECT FROM THE SYSTEM FONTS
-		self.buttonf = py.font.SysFont(font,
-									self.fontsize)
 
-	# DRAW THE BUTTON FOR THE TWO TABS
-	# MENU_SCREEN AND CONTROL TABS MENU
-	def showButton(self, display):
-		if(self.CurrentState):
-			py.draw.rect(display, self.fbcolour,
-						(self.x, self.y, self.sx, self.sy))
-		else:
-			py.draw.rect(display, self.fbcolour,
-						(self.x, self.y, self.sx, self.sy))
-			# RENDER THE FONT OBJECT FROM THE SYSTEM FONTS
-		textsurface = self.buttonf.render(self.text,
-										False,
-										self.fcolour)
-		# THIS LINE WILL DRAW THE SURF ONTO THE SCREEN
-		display.blit(textsurface, ((self.x + (self.sx/2) -
-									(self.fontsize/2)*(len(self.text)/2)
-									- 5, (self.y + (self.sy/2)
-										- (self.fontsize/2)-4))))
+current_user = ""
 
-	# THIS FUNCTION CAPTURE WHETHER ANY
-	# MOUSE EVENT OCCUR ON THE BUTTON
-	def focusCheck(self, mousepos, mouseclick):
-		if(mousepos[0] >= self.x and mousepos[0]
-			<= self.x + self.sx and mousepos[1] >= self.y
-				and mousepos[1] <= self.y + self.sy):
-			self.CurrentState = True
-			# IF MOUSE BUTTON CLICK THEN
-			# NAVIGATE TO THE NEXT OR PREVIOUS TABS
-			return mouseclick[0]
+schedule = Schedule.create_schedule()
 
-		else:
-			# ELSE LET THE CURRENT STATE TO BE OFF
-			self.CurrentState = False
-			return False
+
+def main():
+    is_active = False
+    base_font = pygame.font.Font(None, 32)
+    user_text = ''
+    input_rect = entering_screen.create_input_rect()
+
+    pygame.init()
+    is_display_entering_screen = True
+    while True:
+        if is_display_entering_screen:
+            entering_screen.draw_welcome_screen()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:  # Left mouse button
+                    if entering_screen.create_parent_button().collidepoint(event.pos):
+                        print("Parent selected")
+                        show_schedule.show_table_screen(schedule)
+
+                        current_user = "Parent"
+                    if entering_screen.create_volunteer_button().collidepoint(event.pos):
+                        print("volunteer selected")
+                        current_user = "volunteer"
+                        show_schedule.show_table_screen(schedule)
+                    is_display_entering_screen = False
+
+                    if input_rect.collidepoint(event.pos):
+                        is_active = True
+                    else:
+                        is_active = False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key() == pygame.K_BACKSPACE:
+                    user_text = user_text[:-1]
+
+                else:
+                    user_text += event.unicode
+
+        if is_active:
+            color = entering_screen.color_active
+        else:
+            color = entering_screen.color_passive
+        pygame.draw.rect(entering_screen.screen, color, input_rect)
+        text_surface = base_font.render( entering_screen.user_text, True, (255, 255, 255))
+        entering_screen.screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
+        input_rect.w = max(100, text_surface.get_width()+10)
+        pygame.display.update()
+
+
+
+
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+    main()
