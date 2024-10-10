@@ -1,19 +1,14 @@
 import tkinter
 from tkinter import *
-
 from tkcalendar import DateEntry
+from tkinter import messagebox
 
 def get_request():
     base = Tk()
     base.geometry("500x500")
     base.configure(background='pink')
     base.title("request form")
-    name = StringVar()
-    phone = StringVar()
-    day = StringVar()
-    hours = StringVar()
-    city = StringVar()
-    comment = StringVar()
+
     list = []
 
     lb = Label(base, text="Babysitting Request Form", width=25, font=("arial", 20), background='pink')
@@ -23,7 +18,7 @@ def get_request():
     lb1.place(x=20, y=60)
     en1 = Entry(base)
     en1.place(x=200, y=60)
-    name = en1.get()
+
 
     # lb3 = Label(base, text="Enter Email", width=10, font=("arial", 12))
     # lb3.place(x=19, y=160)
@@ -34,7 +29,7 @@ def get_request():
     lb3.place(x=19, y=100)
     en3 = Entry(base)
     en3.place(x=200, y=100)
-    phone.set(en3.get())
+
 
     def get_selected_date():
         selected_date = en4.get_date()
@@ -46,7 +41,6 @@ def get_request():
     en4.pack(padx=10, pady=10)
     en4.place(x=200, y=140)
     date = get_selected_date()
-
     # lb4 = Label(base, text="date", width=13, font=("arial", 12))
     # lb4.place(x=19, y=140)
     # en4 = Entry(base)
@@ -62,40 +56,65 @@ def get_request():
     list_of_day = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
     cv = StringVar()
     drplist = OptionMenu(base, cv, *list_of_day)
-    drplist.config(width=15)
+    drplist.config(width=15, bg="pink")
     cv.set("Sunday")
     lb2 = Label(base, text="Select day", width=13, font=("arial", 12), background='pink')
     lb2.place(x=14, y=180)
     drplist.place(x=195, y=180)
-    day.set(cv.get())
+
 
     lb6 = Label(base, text="hours", width=13, font=("arial", 12), background='pink')
     lb6.place(x=19, y=230)
     en6 = Entry(base)
     en6.place(x=200, y=230)
-    hours.set(en6.get())
+
 
     lb7 = Label(base, text="city     ", width=15, font=("arial", 12), background='pink')
     lb7.place(x=21, y=270)
     en7 = Entry(base)
     en7.place(x=200, y=270)
-    city.set(en7.get())
+
 
     lb8 = Label(base, text="comment", width=15, font=("arial", 12), background='pink')
     lb8.place(x=15, y=310)
     en8 = tkinter.Text(base, width=25, height=4)
     en8.place(x=200, y=310)
-    comment.set(en8.get("1.0", 'end-1c'))
+
 
     def get_into_list():
-        array = [name, phone, date, day, hours, city, comment]
-        print(array)
+        list = [
+            en1.get(),
+            en3.get(),
+            date,
+            cv.get(),
+            en6.get(),
+            en7.get(),
+            en8.get("1.0", 'end-1c')
+        ]
+        base.quit()
+        return list
+
+
 
     def clicked():
-        get_into_list()
+        nonlocal list
+        list= get_into_list()
 
-    Button(base, text="Register", width=10, command=clicked).place(x=200, y=400)
+    Button(base, text="Send", width=10, command=clicked, bg="pink").place(x=200, y=400)
 
     base.mainloop()
+    return list
 
-get_request()
+list= get_request()
+for i in list:
+    print(i, end=" , ")
+
+import Community
+username= "Maani"
+name= Community.get_member_full_name("Maani")
+phone= Community.get_member_phone_number("Maani")
+gender= Community.get_member_gender("Maani")
+age= Community.get_member_age("Maani")
+experience= Community.get_member_years_of_experience("Maani")
+member_info= "community member: "+username+"\nfull name: "+name+"\nphone number: "+phone+ "\ngender: "+gender+ "\nage: "+age+"\nyears of experience: "+experience
+messagebox.showinfo("showinfo", member_info)
