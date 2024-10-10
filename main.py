@@ -5,16 +5,20 @@ import show_schedule
 import Schedule
 import Screen
 
+
+
 current_user = ""
-schedule = Schedule.create_schedule()
+schedule = Schedule.schedule = Schedule.create_schedule()
 
 
 def main():
     pygame.init()
     is_display_entering_screen = True
+
+
     while True:
         pygame.display.update()
-        if is_display_entering_screen:
+        if is_display_entering_screen :
             entering_screen.draw_welcome_screen()
 
         for event in pygame.event.get():
@@ -24,19 +28,30 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # Left mouse button
-                    if entering_screen.create_parent_button().collidepoint(event.pos):
+                    if  entering_screen.create_parent_button().collidepoint(event.pos):
                         print("Parent selected")
-                        show_schedule.show_table_screen(schedule)
 
-
+                        show_schedule.show_table_screen_for_parent(schedule)
+                        is_display_entering_screen = False
                         current_user = "Parent"
-                    elif entering_screen.create_volunteer_button().collidepoint(event.pos):
+
+                    elif  entering_screen.create_volunteer_button().collidepoint(event.pos):
                         print("volunteer selected")
+
                         current_user = "volunteer"
-                        show_schedule.show_table_screen(schedule)
-                    is_display_entering_screen = False
+                        show_schedule.show_table_for_volunteer(schedule)
+                        is_display_entering_screen = False
+
+
+
+
+
 
                     pygame.display.update()
+
+
+
+
 
 
 
