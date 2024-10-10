@@ -36,7 +36,7 @@ font = pygame.font.SysFont(Consts.FONT_NAME, 20)
 def draw_cell(text, x, y, width, height, color=Consts.WHITE, border_color=Consts.BLACK):
     pygame.draw.rect(screen, color, (x, y, width, height))  # Fill color
     pygame.draw.rect(screen, border_color, (x, y, width, height), 2)  # Border
-    text_surface = font.render(text, True, Consts.BLACK)
+    text_surface = font.render(str(text), True, Consts.BLACK)  # Convert text to string
     text_rect = text_surface.get_rect(center=(x + width // 2, y + height // 2))
     screen.blit(text_surface, text_rect)
 
