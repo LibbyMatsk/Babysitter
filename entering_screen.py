@@ -45,6 +45,10 @@ def create_parent_button():
 def create_volunteer_button():
     return pygame.Rect(420, 450, 370, 80)
 
+def create_input_rect():
+    return pygame.Rect(200, 200, 140, 32)
+
+
 
 def draw_welcome_screen():
     screen.fill(Consts.BACKGROUND_COLOR)
