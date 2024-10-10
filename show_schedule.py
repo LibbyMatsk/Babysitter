@@ -1,4 +1,4 @@
-
+import tkinter
 import pygame
 import sys
 import Schedule
@@ -64,6 +64,7 @@ def draw_request_button_text(x, y):
     draw_message(message, 30, Consts.HELLO_COLOR,
                  (x,y))
 def create_request_button():
+
     return pygame.Rect(210, 300, 370, 80)
 
 def show_table_for_volunteer(schedule):
@@ -78,7 +79,7 @@ def show_table_screen_for_parent(schedule):
     draw_table(rows_headers[0], rows_headers[1])
     request_button = create_request_button()
     pygame.draw.rect(screen, (255, 255, 255), request_button)
-    draw_request_button_text(300, 22)
+    draw_request_button_text(30, 22)
     pygame.display.update()
 
 def update_schedule(schedule, newRequest):
