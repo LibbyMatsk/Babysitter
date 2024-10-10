@@ -21,7 +21,7 @@ def table_headers_and_rows(schedule):
         rows.append(row_i)
     return rows, headers
 
-
+pygame.init()
 screen = pygame.display.set_mode((Consts.WINDOW_WIDTH, Consts.WINDOW_HEIGHT))
 pygame.display.set_caption("Babysitter Requests")
 

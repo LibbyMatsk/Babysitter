@@ -3,6 +3,7 @@ import sys
 import Consts
 import Button
 import Screen
+import request
 
 
 pygame.init()
@@ -11,6 +12,12 @@ pygame.init()
 screen = pygame.display.set_mode((Consts.WINDOW_WIDTH, Consts.WINDOW_HEIGHT))
 pygame.display.set_caption("Babysitter Matching Platform")
 screen.fill(Consts.BACKGROUND_COLOR)
+
+color_active = pygame.Color('lightskyblue3')
+color_passive = pygame.Color('chartreuse4')
+user_text = ''
+
+
 
 
 def draw_message(message, font_size, color, location):
@@ -44,6 +51,15 @@ def create_parent_button():
     return pygame.Rect(420, 330, 370, 80)
 def create_volunteer_button():
     return pygame.Rect(420, 450, 370, 80)
+def create_input_rect():
+    return pygame.Rect(200, 200, 140, 32)
+
+
+
+
+
+
+
 
 
 def draw_welcome_screen():
@@ -63,6 +79,9 @@ def draw_welcome_screen():
 
     draw_hello_text()
     draw_question_text()
+
+
+
 
 
     pygame.display.update()
