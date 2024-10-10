@@ -79,6 +79,7 @@ def show_table_for_volunteer(schedule):
     screen.fill(Consts.WHITE)
     rows_headers = table_headers_and_rows(schedule)
     draw_table(rows_headers[0], rows_headers[1])
+    draw_title()
     pygame.display.update()
 
 def show_table_screen_for_parent(schedule):
@@ -88,6 +89,7 @@ def show_table_screen_for_parent(schedule):
     request_button = create_request_button()
     pygame.draw.rect(screen, (255, 255, 255), request_button)
     draw_request_button_text(300, 22)
+    draw_title()
     pygame.display.update()
 
 def update_schedule(schedule, newRequest):
