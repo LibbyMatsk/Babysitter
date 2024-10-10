@@ -4,6 +4,28 @@ import sys
 import Schedule
 import Consts
 
+def draw_message(message, font_size, color, location):
+    font = pygame.font.SysFont(Consts.FONT_NAME, font_size)
+    text_img = font.render(message, True, color)
+    screen.blit(text_img, location)
+
+def create_sign_up_button(x, y):
+    sign_button = pygame.Rect(x, y, Consts.CELL_WIDTH - 10, Consts.CELL_HEIGHT - 10)
+    pygame.draw.rect(screen, Consts.BACKGROUND_COLOR, sign_button)
+    draw_button_sign_up_text(x + 10, y + 10)  # Adjust text position
+
+
+def draw_button_sign_up_text(x,y):
+    message = "Sign Up Now!"
+    draw_message(message, 20, Consts.HELLO_COLOR,
+                 (x, y))
+
+
+def create_sign_btn(x,y):
+    sign_button = pygame.Rect(x, y, Consts.CELL_WIDTH-10, Consts.CELL_HEIGHT-10)
+    pygame.draw.rect(screen, Consts.BACKGROUND_COLOR, sign_button)
+    draw_button_sign_up_text(490, 475)
+
 def table_headers_and_rows(schedule):
     '''
 
@@ -20,18 +42,14 @@ def table_headers_and_rows(schedule):
         for j in schedule.keys():
             row_i.append(schedule[j][i])
         rows.append(row_i)
-    return rows, headers
 
+
+
+    return rows, headers
 
 screen = pygame.display.set_mode((Consts.WINDOW_WIDTH, Consts.WINDOW_HEIGHT))
 pygame.display.set_caption("Babysitter Requests")
 
-# Data for babysitter requests
-
-def draw_message(message, font_size, color, location):
-    font = pygame.font.SysFont(Consts.FONT_NAME, font_size)
-    text_img = font.render(message, True, color)
-    screen.blit(text_img, location)
 
 def draw_title():
     message = "Babysitting Schedule".upper()
@@ -39,7 +57,6 @@ def draw_title():
                  (300, 50))
 
 pygame.init()
-# Font
 font = pygame.font.SysFont('Arial', 20)
 
 def draw_cell(text, x, y, width, height, color=Consts.WHITE, border_color=Consts.BLACK):
@@ -61,6 +78,12 @@ def draw_table(rows, headers):
             x = Consts.TABLE_X + col_index * Consts.CELL_WIDTH
             y = Consts.TABLE_Y + (row_index + 1) * Consts.CELL_HEIGHT  # Below the header row
             draw_cell(cell, x, y, Consts.CELL_WIDTH, Consts.CELL_HEIGHT, Consts.ROW_COLOR)
+
+            # If this is the volunteers column, draw the sign-up button
+            if col_index == len(headers) - 1:  # Assuming last column is for volunteers
+                create_sign_up_button(x + 5, y + 5)
+                # Small offset for better appearance
+
 
 
 def draw_message(message, font_size, color, location):
@@ -96,25 +119,3 @@ def update_schedule(schedule, newRequest):
     Schedule.add_request_line(schedule, newRequest)
     show_table_screen_for_parent(schedule)
 
-
-
-
-# def main():
-#     running = True
-#     while running:
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 running = False
-#                 pygame.quit()
-#                 sys.exit()
-#
-#         # Fill screen with white background
-#         screen.fill(WHITE)
-#
-#         # Draw the table
-#         draw_table()
-#
-#         pygame.display.update()
-#
-# if __name__ == "__main__":
-#     main()

@@ -54,17 +54,8 @@ def create_volunteer_button():
 def create_input_rect():
     return pygame.Rect(200, 200, 140, 32)
 
-
-
-
-
-
-
-
 def create_input_rect():
     return pygame.Rect(200, 200, 140, 32)
-
-
 
 def draw_welcome_screen():
     screen.fill(Consts.BACKGROUND_COLOR)
@@ -83,10 +74,6 @@ def draw_welcome_screen():
 
     draw_hello_text()
     draw_question_text()
-
-
-
-
 
     pygame.display.update()
 
