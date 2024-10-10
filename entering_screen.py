@@ -22,12 +22,12 @@ def draw_message(message, font_size, color, location):
 def draw_hello_text():
     message = "Welcome To SitterFinder!"
     draw_message(message, 50, Consts.HELLO_COLOR,
-                 (130, Consts.WINDOW_HEIGHT // 4))
+                 ( 360, Consts.WINDOW_HEIGHT // 4))
 
 def draw_question_text():
     message = "Are you a parent or a volunteer?"
     draw_message(message, 30, Consts.HELLO_COLOR,
-                 (210, Consts.WINDOW_HEIGHT // 4  + 45))
+                 (420, Consts.WINDOW_HEIGHT // 4  + 45))
 
 def draw_button_volunteer_text(x, y):
     message = "I'm a volunteer"
@@ -41,9 +41,9 @@ def draw_button_parent_text(x, y):
 
 
 def create_parent_button():
-    return pygame.Rect(210, 300, 370, 80)
+    return pygame.Rect(420, 330, 370, 80)
 def create_volunteer_button():
-    return pygame.Rect(210, 400, 370, 80)
+    return pygame.Rect(420, 450, 370, 80)
 
 
 def draw_welcome_screen():
@@ -54,12 +54,12 @@ def draw_welcome_screen():
     pygame.draw.rect(screen, (255,255,255), parent_button)
     pygame.draw.rect(screen, (255,255,255), volunteer_button)
 
-    draw_button_volunteer_text(280, 425)
-    draw_button_parent_text(280, 325)
+    draw_button_volunteer_text(490, 475)
+    draw_button_parent_text(490, 355)
 
-    screen.blit(Consts.VOLUNTEER_IMAGE, (210, 405))
-    screen.blit(Consts.PARENT_IMAGE, (210, 315))
-    screen.blit(Consts.LOGO_IMAGE, (340, 60))
+    screen.blit(Consts.VOLUNTEER_IMAGE, (420, 455))
+    screen.blit(Consts.PARENT_IMAGE, (420, 345))
+    screen.blit(Consts.LOGO_IMAGE, (560, 60))
 
     draw_hello_text()
     draw_question_text()

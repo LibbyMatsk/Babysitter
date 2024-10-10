@@ -1,15 +1,18 @@
 import pygame
+
+CELL_WIDTH = 150
+CELL_HEIGHT = 40
+TABLE_X = 10
+TABLE_Y = 100  # Table start position
+
 WINDOW_HEIGHT = 750
-WINDOW_WIDTH = 800
+WINDOW_WIDTH = CELL_WIDTH*8 +20
 WHITE = (255, 255, 255)
 LIGHT_BLUE = (173, 216, 230)
 LIGHT_GREEN = (144, 238, 144)
 FONT_NAME = "David"
 
-CELL_WIDTH = 150
-CELL_HEIGHT = 40
-TABLE_X = 50
-TABLE_Y = 100  # Table start position
+
 
 # Colors
 
