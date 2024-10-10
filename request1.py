@@ -2,6 +2,11 @@ import tkinter
 from tkinter import *
 from tkcalendar import DateEntry
 from tkinter import messagebox
+import show_schedule
+import Schedule
+
+if Schedule.schedule is None:
+    Schedule.schedule = Schedule.create_schedule()
 
 def get_request():
     base = Tk()
@@ -20,10 +25,10 @@ def get_request():
     en1.place(x=200, y=60)
 
 
-    # lb3 = Label(base, text="Enter Email", width=10, font=("arial", 12))
-    # lb3.place(x=19, y=160)
-    # en3 = Entry(base)
-    # en3.place(x=200, y=160)
+        # lb3 = Label(base, text="Enter Email", width=10, font=("arial", 12))
+        # lb3.place(x=19, y=160)
+        # en3 = Entry(base)
+        # en3.place(x=200, y=160)
 
     lb3 = Label(base, text="Contact Number", width=13, font=("arial", 12), background='pink')
     lb3.place(x=19, y=100)
@@ -42,16 +47,16 @@ def get_request():
     en4.place(x=200, y=140)
     date = get_selected_date()
     # lb4 = Label(base, text="date", width=13, font=("arial", 12))
-    # lb4.place(x=19, y=140)
-    # en4 = Entry(base)
-    # en4.place(x=200, y=140)
+        # lb4.place(x=19, y=140)
+        # en4 = Entry(base)
+        # en4.place(x=200, y=140)
 
-    # lb5 = Label(base, text="Select Gender", width=15, font=("arial", 12))
-    # lb5.place(x=5, y=240)
-    # vars = IntVar()
-    # Radiobutton(base, text="Male", padx=5, variable=vars, value=1).place(x=180, y=240)
-    # Radiobutton(base, text="Female", padx=10, variable=vars, value=2).place(x=240, y=240)
-    # Radiobutton(base, text="others", padx=15, variable=vars, value=3).place(x=310, y=240)
+        # lb5 = Label(base, text="Select Gender", width=15, font=("arial", 12))
+        # lb5.place(x=5, y=240)
+        # vars = IntVar()
+        # Radiobutton(base, text="Male", padx=5, variable=vars, value=1).place(x=180, y=240)
+        # Radiobutton(base, text="Female", padx=10, variable=vars, value=2).place(x=240, y=240)
+        # Radiobutton(base, text="others", padx=15, variable=vars, value=3).place(x=310, y=240)
 
     list_of_day = ("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
     cv = StringVar()
@@ -83,13 +88,13 @@ def get_request():
 
     def get_into_list():
         list = [
-            en1.get(),
-            en3.get(),
-            date,
-            cv.get(),
-            en6.get(),
-            en7.get(),
-            en8.get("1.0", 'end-1c')
+                en1.get(),
+                en3.get(),
+                date,
+                cv.get(),
+                en6.get(),
+                en7.get(),
+                en8.get("1.0", 'end-1c')
         ]
         base.quit()
         return list
@@ -98,23 +103,23 @@ def get_request():
 
     def clicked():
         nonlocal list
-        list= get_into_list()
+        list = get_into_list()
+        show_schedule.update_schedule(Schedule.schedule, list)
+
 
     Button(base, text="Send", width=10, command=clicked, bg="pink").place(x=200, y=400)
-
     base.mainloop()
-    return list
 
-list= get_request()
-for i in list:
-    print(i, end=" , ")
+get_request()
 
-import Community
-username= "Maani"
-name= Community.get_member_full_name("Maani")
-phone= Community.get_member_phone_number("Maani")
-gender= Community.get_member_gender("Maani")
-age= Community.get_member_age("Maani")
-experience= Community.get_member_years_of_experience("Maani")
-member_info= "community member: "+username+"\nfull name: "+name+"\nphone number: "+phone+ "\ngender: "+gender+ "\nage: "+age+"\nyears of experience: "+experience
-messagebox.showinfo("showinfo", member_info)
+
+
+# import Community
+# username= "Maani"
+# name= Community.get_member_full_name("Maani")
+# phone= Community.get_member_phone_number("Maani")
+# gender= Community.get_member_gender("Maani")
+# age= Community.get_member_age("Maani")
+# experience= Community.get_member_years_of_experience("Maani")
+# member_info= "community member: "+username+"\nfull name: "+name+"\nphone number: "+phone+ "\ngender: "+gender+ "\nage: "+age+"\nyears of experience: "+experience
+# messagebox.showinfo("showinfo", member_info)
